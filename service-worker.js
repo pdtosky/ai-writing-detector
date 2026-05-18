@@ -1,10 +1,14 @@
-const CACHE_NAME = "ai-detector-v2";
+const CACHE_NAME = "ai-detector-v3";
 const ASSETS = [
   "./",
   "./index.html",
   "./styles.css",
   "./app.js",
+  "./app.js?v=3",
+  "./jump.js",
+  "./jump.js?v=3",
   "./install.js",
+  "./install.js?v=3",
   "./manifest.webmanifest",
   "./icon.svg",
   "./maskable-icon.svg"
@@ -12,6 +16,7 @@ const ASSETS = [
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS)));
+  self.skipWaiting();
 });
 
 self.addEventListener("activate", (event) => {
@@ -20,6 +25,7 @@ self.addEventListener("activate", (event) => {
       Promise.all(keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key)))
     )
   );
+  self.clients.claim();
 });
 
 self.addEventListener("fetch", (event) => {
