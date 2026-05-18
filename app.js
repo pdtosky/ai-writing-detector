@@ -1,4 +1,3 @@
-const titleInput = document.querySelector("#titleInput");
 const textInput = document.querySelector("#textInput");
 const clearButton = document.querySelector("#clearButton");
 const sampleButton = document.querySelector("#sampleButton");
@@ -547,9 +546,8 @@ function saveDocument() {
     return;
   }
 
-  const title = titleInput.value.trim() || "수정본";
-  const filename = `${safeFilename(title)}.txt`;
-  const content = titleInput.value.trim() ? `${title}\n\n${body}` : body;
+  const filename = "수정본.txt";
+  const content = body;
   const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
@@ -559,10 +557,6 @@ function saveDocument() {
   link.click();
   link.remove();
   URL.revokeObjectURL(url);
-}
-
-function safeFilename(value) {
-  return value.replace(/[\\/:*?"<>|]/g, "_").replace(/\s+/g, "_").slice(0, 80) || "수정본";
 }
 
 function escapeHtml(value) {
@@ -585,7 +579,6 @@ clearButton.addEventListener("click", () => {
   render();
 });
 sampleButton.addEventListener("click", () => {
-  titleInput.value = "AI 문체 수정 예시";
   textInput.value = sampleText;
   render();
 });
