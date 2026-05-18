@@ -40,6 +40,10 @@ button {
   touch-action: manipulation;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 .app-shell {
   width: min(1180px, calc(100% - 32px));
   margin: 0 auto;
@@ -136,6 +140,11 @@ h2 {
 
 .primary-button:hover {
   background: var(--accent-strong);
+}
+
+.install-button {
+  border-color: var(--accent);
+  color: var(--accent-strong);
 }
 
 .editor-grid {
@@ -270,6 +279,17 @@ input:focus {
   border-radius: 8px;
 }
 
+.signal.has-target {
+  cursor: pointer;
+}
+
+.signal.has-target:hover,
+.signal.has-target:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(31, 122, 104, 0.12);
+  outline: none;
+}
+
 .signal strong {
   font-size: 14px;
 }
@@ -312,6 +332,11 @@ input:focus {
 .revision-card.low {
   background: #fff;
   border-color: var(--line);
+}
+
+.revision-card.jump-highlight {
+  border-color: var(--accent-strong);
+  box-shadow: 0 0 0 4px rgba(31, 122, 104, 0.2);
 }
 
 .revision-meta {
@@ -368,14 +393,37 @@ input:focus {
   gap: 6px;
 }
 
-.reason-list span {
+.reason-chip {
   border: 1px solid rgba(100, 112, 109, 0.25);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.65);
   color: var(--muted);
+  cursor: pointer;
+  font-family: inherit;
   font-size: 12px;
   line-height: 1.35;
   padding: 4px 8px;
+  text-align: left;
+}
+
+.reason-chip:hover,
+.reason-chip:focus,
+.reason-chip.is-active {
+  border-color: #d2a81e;
+  background: #fff3c4;
+  color: var(--ink);
+  outline: none;
+}
+
+.reason-detail {
+  margin: -2px 0 0;
+  padding: 9px 10px;
+  border: 1px solid rgba(100, 112, 109, 0.18);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
 }
 
 .revision-actions {
@@ -463,7 +511,7 @@ input:focus {
   .topbar-actions,
   .button-row {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     width: 100%;
   }
 
