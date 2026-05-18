@@ -1,14 +1,14 @@
-const CACHE_NAME = "ai-detector-v7";
+const CACHE_NAME = "ai-detector-v8";
 const ASSETS = [
   "./",
   "./index.html",
   "./styles.css",
   "./app.js",
-  "./app.js?v=7",
-  "jump.js",
-  "./jump.js?v=7",
+  "./app.js?v=8",
+  "./jump.js",
+  "./jump.js?v=8",
   "./install.js",
-  "./install.js?v=7",
+  "./install.js?v=8",
   "./manifest.webmanifest",
   "./icon.svg",
   "./maskable-icon.svg"
