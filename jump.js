@@ -22,6 +22,7 @@ const jumpAiPhrases = [
 const jumpPersonalMarkers = ["나는", "내가", "제가", "저는", "우리", "느꼈", "봤다", "겪었", "기억", "i ", "my ", "me "];
 
 const jumpStyle = document.createElement("style");
+let jumpHighlightTimer = 0;
 jumpStyle.textContent = `
   .signal.has-target { cursor: pointer; }
   .signal.has-target:hover,
@@ -79,23 +80,32 @@ function jumpSyncTargets() {
 
   signals.forEach((signal, index) => {
     const targets = targetSets[index] || [];
-    signal.dataset.jumpTargets = targets.join(",");
+    const targetSignature = targets.join(",");
+    if (signal.dataset.jumpTargets !== targetSignature) {
+      signal.dataset.jumpCursor = "0";
+    }
+    signal.dataset.jumpTargets = targetSignature;
     signal.classList.toggle("has-target", targets.length > 0);
     signal.setAttribute("role", "button");
     signal.setAttribute("tabindex", "0");
-    signal.setAttribute("title", "관련 문장으로 이동");
+    signal.setAttribute("title", "누를 때마다 다음 관련 문장으로 이동");
   });
 }
 
 function jumpToSignal(signal) {
   jumpSyncTargets();
-  const targetIndex = (signal.dataset.jumpTargets || "").split(",").filter(Boolean)[0];
+  const targetIndexes = (signal.dataset.jumpTargets || "").split(",").filter(Boolean);
+  const cursor = Number(signal.dataset.jumpCursor || "0");
+  const targetIndex = targetIndexes[cursor % Math.max(targetIndexes.length, 1)];
   const target = document.querySelector(`.revision-card[data-jump-index="${targetIndex}"]`) || document.querySelector(".revision-card");
   if (!target) return;
+  signal.dataset.jumpCursor = String((cursor + 1) % Math.max(targetIndexes.length, 1));
   target.scrollIntoView({ behavior: "smooth", block: "center" });
-  target.classList.remove("jump-highlight");
-  window.setTimeout(() => target.classList.add("jump-highlight"), 20);
-  window.setTimeout(() => target.classList.remove("jump-highlight"), 1600);
+  window.clearTimeout(jumpHighlightTimer);
+  document.querySelectorAll(".revision-card.jump-highlight").forEach((card) => card.classList.remove("jump-highlight"));
+  void target.offsetWidth;
+  target.classList.add("jump-highlight");
+  jumpHighlightTimer = window.setTimeout(() => target.classList.remove("jump-highlight"), 1600);
 }
 
 document.addEventListener("click", (event) => {
