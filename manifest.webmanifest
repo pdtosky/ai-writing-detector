@@ -3,9 +3,23 @@
   "short_name": "AI 판독기",
   "description": "웹소설 원고의 AI 문체 의심도와 수정 이유를 확인하는 도구",
   "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#f4f6f3",
   "theme_color": "#1f7a68",
   "lang": "ko",
-  "icons": []
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "maskable-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
 }
