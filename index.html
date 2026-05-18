@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#1f7a68" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="AI 글 판독기" />
+    <title>AI 글 판독기</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="manifest" href="manifest.webmanifest" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="workspace" aria-label="AI 글 판독기">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">노벨피아 · 문피아 업로드 전 점검</p>
+            <h1>AI 글 판독기</h1>
+          </div>
+          <div class="topbar-actions">
+            <button id="sampleButton" class="ghost-button" type="button">예시 넣기</button>
+            <button id="saveButton" class="primary-button" type="button">TXT 저장</button>
+          </div>
+        </header>
+
+        <div class="editor-grid">
+          <section class="input-panel" aria-label="글 입력">
+            <div class="field-row">
+              <label for="titleInput">문서 제목</label>
+              <input id="titleInput" type="text" placeholder="작품명 또는 회차 제목" />
+            </div>
+
+            <label for="textInput">분석하고 수정할 글</label>
+            <textarea
+              id="textInput"
+              spellcheck="false"
+              placeholder="여기에 글을 붙여 넣으면 AI 문체 의심도와 수정할 문장이 표시됩니다."
+            ></textarea>
+            <div class="input-actions">
+              <p id="textStats">0자 · 0문장</p>
+              <div class="button-row">
+                <button id="formatButton" class="ghost-button compact" type="button">업로드용 정리</button>
+                <button id="clearButton" class="icon-button" type="button" aria-label="지우기" title="지우기">×</button>
+              </div>
+            </div>
+          </section>
+
+          <aside class="result-panel" aria-label="분석 결과">
+            <div class="score-card">
+              <div class="score-labels">
+                <span>AI 의심도</span>
+                <strong id="aiPercent">0%</strong>
+              </div>
+              <div class="meter" aria-hidden="true">
+                <div id="aiMeter" class="meter-fill"></div>
+              </div>
+              <div class="split">
+                <span id="humanPercent">사람 작성 가능성 0%</span>
+                <span id="confidenceLabel">대기 중</span>
+              </div>
+            </div>
+
+            <div class="signal-list" id="signalList"></div>
+          </aside>
+        </div>
+
+        <section class="revision-panel" aria-label="전체 문장 수정">
+          <div class="section-heading">
+            <div>
+              <h2>전체 문장 보기와 수정</h2>
+              <p>모든 문장을 점수별로 보여줍니다. 자연스러운 문장도 같이 보면서 흐름을 맞출 수 있습니다.</p>
+            </div>
+            <span id="sentenceSummary">글을 입력해 주세요</span>
+          </div>
+          <div id="revisionList" class="revision-list">
+            <p class="muted">문장별 수정 카드가 여기에 표시됩니다.</p>
+          </div>
+        </section>
+
+        <section class="notice" aria-label="주의 사항">
+          <strong>주의</strong>
+          <p>
+            이 도구는 확정 판별기가 아니라 문체 신호를 종합한 추정기입니다. 저장한 TXT는
+            노벨피아나 문피아의 웹 편집기에 붙여 넣기 좋은 일반 텍스트 형식입니다.
+            점수는 상투적 표현, 설명문 종결, 추상어 반복, 문장 길이 균일도를 올리고
+            대사, 행동, 감각 묘사, 개인적 표현이 있으면 낮춥니다.
+          </p>
+        </section>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
