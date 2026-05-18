@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="AI 글 판독기 아이콘">
+  <rect width="512" height="512" fill="#1f7a68"/>
+  <circle cx="256" cy="256" r="214" fill="#e8f3ef"/>
+  <path d="M144 136h224c26 0 48 22 48 48v144c0 26-22 48-48 48H144c-26 0-48-22-48-48V184c0-26 22-48 48-48Z" fill="#ffffff"/>
+  <path d="M156 198h198M156 252h150M156 306h96" fill="none" stroke="#18211f" stroke-width="26" stroke-linecap="round"/>
+  <circle cx="344" cy="304" r="40" fill="#fff0bf" stroke="#c96b36" stroke-width="16"/>
+  <path d="m376 336 38 38" fill="none" stroke="#c96b36" stroke-width="22" stroke-linecap="round"/>
+</svg>
